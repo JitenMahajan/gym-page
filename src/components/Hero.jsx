@@ -18,7 +18,7 @@ const Hero = () => {
     return (
         <section ref={container} className="relative h-screen overflow-hidden bg-obsidian">
 
-            {/* YOUR VIDEO */}
+            {/* Dummy gym video */}
             <video
                 autoPlay
                 muted
@@ -26,7 +26,10 @@ const Hero = () => {
                 playsInline
                 className="absolute inset-0 w-full h-full object-cover opacity-50"
             >
-                <source src="/videos/workout.mp4" type="video/mp4" />
+                <source
+                    src="https://assets.mixkit.co/videos/preview/mixkit-man-doing-push-ups-at-the-gym-227-large.mp4"
+                    type="video/mp4"
+                />
             </video>
 
             <div className="absolute inset-0 bg-gradient-to-b from-black/80 to-black/90" />
