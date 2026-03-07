@@ -1,54 +1,98 @@
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+import strength from "../assets/images/strength.jpeg";
+import training from "../assets/images/training.jpeg";
+import workout from "../assets/images/workout.jpeg";
+import dumbbell from "../assets/images/dumbbell.jpeg";
+import coach from "../assets/images/coach.jpeg";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Gallery = () => {
 
     const container = useRef();
 
-    useGSAP(() => {
-        gsap.from(".gallery-img", {
-            scrollTrigger: {
-                trigger: container.current,
-                start: "top 80%",
-            },
-            y: 100,
-            opacity: 0,
-            duration: 1,
-            stagger: 0.15,
-            ease: "power3.out",
-        });
-    });
-
     const images = [
-        "https://images.unsplash.com/photo-1579758629938-03607ccdbaba",
-        "https://images.unsplash.com/photo-1517836357463-d25dfeac3438",
-        "https://images.unsplash.com/photo-1518611012118-696072aa579a",
-        "https://images.unsplash.com/photo-1599058917212-d750089bc07e",
-        "https://images.unsplash.com/photo-1605296867424-35fc25c9212a",
-        "https://images.unsplash.com/photo-1549060279-7e168fcee0c2"
+        strength,
+        training,
+        workout,
+        dumbbell,
+        coach
     ];
 
-    return (
-        <section ref={container} className="py-24 bg-black">
+    useGSAP(() => {
 
-            <div className="max-w-7xl mx-auto px-4 text-center mb-16">
-                <h2 className="text-6xl font-display uppercase text-volt">
+        const ctx = gsap.context(() => {
+
+            gsap.from(".gallery-item", {
+                scrollTrigger: {
+                    trigger: container.current,
+                    start: "top 80%",
+                },
+                y: 60,
+                opacity: 0,
+                duration: 1,
+                stagger: 0.2,
+                ease: "power3.out",
+            });
+
+        }, container);
+
+        return () => ctx.revert();
+
+    }, { scope: container });
+
+    return (
+        <section ref={container} className="py-20 md:py-24 bg-black">
+
+            {/* Section header */}
+            <div className="max-w-7xl mx-auto px-6 text-center mb-16">
+
+                <h2 className="text-4xl sm:text-5xl md:text-6xl font-display uppercase text-volt">
                     Transformations
                 </h2>
+
+                <p className="text-prose-secondary mt-4 max-w-xl mx-auto">
+                    Real results from disciplined training and consistent effort.
+                </p>
+
             </div>
 
-            <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+            {/* Gallery grid */}
+            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
                 {images.map((src, i) => (
-                    <img
+
+                    <div
                         key={i}
-                        src={src}
-                        className="gallery-img rounded-xl hover:scale-105 transition duration-500"
-                    />
+                        className="gallery-item relative overflow-hidden rounded-xl group"
+                    >
+
+                        {/* Image */}
+                        <img
+                            src={src}
+                            alt="gym training"
+                            className="w-full h-[320px] md:h-[350px] object-cover transition duration-700 group-hover:scale-110"
+                        />
+
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500 flex items-center justify-center">
+
+              <span className="text-white font-display uppercase tracking-wider text-sm">
+                View Result
+              </span>
+
+                        </div>
+
+                    </div>
+
                 ))}
 
             </div>
+
         </section>
     );
 };
