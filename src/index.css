@@ -4,8 +4,13 @@
 
 @layer base {
   body {
-    background-color: theme('colors.primary');
+    margin: 0;
+    background-color: theme('colors.obsidian');
     color: theme('colors.white');
     font-family: theme('fontFamily.sans');
+  }
+
+  html {
+    scroll-behavior: smooth;
   }
 }

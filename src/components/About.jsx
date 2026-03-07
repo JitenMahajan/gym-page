@@ -1,11 +1,14 @@
+import coach from "../assets/images/coach.jpeg";
+
 const About = () => {
     return (
-        <section className="py-24 bg-black">
+        <section id="about" className="py-24 bg-black">
             <div className="max-w-6xl mx-auto px-4 grid md:grid-cols-2 gap-16 items-center">
                 <img
-                    src="https://images.unsplash.com/photo-1599058917212-d750089bc07e"
+                    src={coach}
                     alt="Coach"
                     className="rounded-2xl shadow-xl"
+                    loading="lazy"
                 />
 
                 <div>
@@ -13,12 +16,12 @@ const About = () => {
                         Built Through Discipline
                     </h2>
                     <p className="text-prose-secondary leading-relaxed font-sans mb-6">
-                        I wasn’t born strong. I built it. Through pain, consistency,
+                        I was not born strong. I built it through pain, consistency,
                         and relentless focus. My mission is to help you unlock your
-                        strongest version — physically and mentally.
+                        strongest version, physically and mentally.
                     </p>
                     <div className="border-l-4 border-volt pl-4 italic text-prose-primary">
-                        “Growth begins where excuses end.”
+                        "Growth begins where excuses end."
                     </div>
                 </div>
             </div>
