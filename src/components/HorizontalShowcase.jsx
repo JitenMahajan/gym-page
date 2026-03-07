@@ -76,7 +76,7 @@ const HorizontalShowcase = () => {
     );
 
     return (
-        <section ref={container} className="h-[92vh] md:min-h-[100svh] bg-black overflow-hidden flex flex-col">
+        <section id="showcase" ref={container} className="h-[92vh] md:min-h-[100svh] bg-black overflow-hidden flex flex-col">
             <div className="px-4 sm:px-6 md:px-10 pt-6 md:pt-10 pb-3 md:pb-5 shrink-0">
                 <p className="text-[10px] sm:text-xs tracking-[0.22em] text-prose-secondary uppercase">Movement System</p>
                 <h2 className="font-display uppercase text-3xl sm:text-4xl md:text-6xl text-volt mt-1 md:mt-2 leading-none">
@@ -114,4 +114,5 @@ const HorizontalShowcase = () => {
 };
 
 export default HorizontalShowcase;
+
 
