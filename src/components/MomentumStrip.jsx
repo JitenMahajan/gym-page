@@ -9,6 +9,10 @@ const MomentumStrip = () => {
     return (
         <section className="py-10 md:py-14 bg-gradient-to-r from-black via-[#111] to-black border-y border-white/10">
             <div className="max-w-7xl mx-auto px-4 md:px-6">
+                <div className="text-center mb-6">
+                    <p className="text-xs uppercase tracking-[0.2em] text-prose-secondary">Performance Snapshot</p>
+                </div>
+
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                     {stats.map((item) => (
                         <article key={item.label} className="rounded-xl bg-white/5 border border-white/10 p-4 md:p-5 text-center">

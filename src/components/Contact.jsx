@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const quickInfo = [
     { label: "Phone", value: "6230348752", href: "tel:6230348752" },
     { label: "Email", value: "elite@gymstudio.com", href: "mailto:elite@gymstudio.com" },
@@ -5,6 +7,14 @@ const quickInfo = [
 ];
 
 const Contact = () => {
+    const [submitted, setSubmitted] = useState(false);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        event.currentTarget.reset();
+        setSubmitted(true);
+    };
+
     return (
         <section id="contact" className="py-20 md:py-24 bg-obsidian">
             <div className="max-w-6xl mx-auto px-4">
@@ -17,10 +27,8 @@ const Contact = () => {
                     </div>
 
                     <div className="grid md:grid-cols-5 gap-6 md:gap-8">
-                        <form className="md:col-span-3 space-y-5" onSubmit={(e) => e.preventDefault()}>
-                            <label htmlFor="name" className="sr-only">
-                                Your Name
-                            </label>
+                        <form className="md:col-span-3 space-y-5" onSubmit={handleSubmit}>
+                            <label htmlFor="name" className="sr-only">Your Name</label>
                             <input
                                 id="name"
                                 type="text"
@@ -30,9 +38,7 @@ const Contact = () => {
                                 required
                             />
 
-                            <label htmlFor="email" className="sr-only">
-                                Your Email
-                            </label>
+                            <label htmlFor="email" className="sr-only">Your Email</label>
                             <input
                                 id="email"
                                 type="email"
@@ -42,9 +48,7 @@ const Contact = () => {
                                 required
                             />
 
-                            <label htmlFor="goal" className="sr-only">
-                                Your Goal
-                            </label>
+                            <label htmlFor="goal" className="sr-only">Your Goal</label>
                             <textarea
                                 id="goal"
                                 placeholder="Your Goal"
@@ -56,6 +60,12 @@ const Contact = () => {
                             <button className="w-full bg-volt text-obsidian font-bold py-4 rounded-lg hover:brightness-95 hover:scale-[1.01] transition">
                                 Apply Now
                             </button>
+
+                            {submitted && (
+                                <p className="text-sm text-volt text-center" role="status" aria-live="polite">
+                                    Request received. We will call you shortly.
+                                </p>
+                            )}
                         </form>
 
                         <aside className="md:col-span-2 space-y-4">
@@ -73,7 +83,7 @@ const Contact = () => {
                             ))}
 
                             <p className="text-sm text-prose-secondary leading-relaxed pt-2">
-                                We respond quickly and help you choose the right path based on your current level and goals.
+                                We respond quickly and help you choose the right plan based on your current level and goals.
                             </p>
                         </aside>
                     </div>

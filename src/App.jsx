@@ -5,16 +5,19 @@ import ScrollSection from "./components/ScrollSection";
 import MomentumStrip from "./components/MomentumStrip";
 import Classes from "./components/Classes";
 import HorizontalShowcase from "./components/HorizontalShowcase";
+import Testimonials from "./components/Testimonials";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import BackToTop from "./components/BackToTop";
+import ScrollProgress from "./components/ScrollProgress";
 
 function App() {
     return (
         <>
+            <ScrollProgress />
             <a
                 href="#main-content"
-                className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[70] focus:bg-volt focus:text-black focus:px-4 focus:py-2 focus:rounded"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[80] focus:bg-volt focus:text-black focus:px-4 focus:py-2 focus:rounded"
             >
                 Skip to content
             </a>
@@ -27,6 +30,7 @@ function App() {
                 <MomentumStrip />
                 <Classes />
                 <HorizontalShowcase />
+                <Testimonials />
                 <Contact />
                 <Footer />
                 <BackToTop />

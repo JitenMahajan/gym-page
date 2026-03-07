@@ -4,6 +4,7 @@ const desktopLinks = [
     { id: "programs", label: "Programs" },
     { id: "classes", label: "Classes" },
     { id: "showcase", label: "Showcase" },
+    { id: "stories", label: "Stories" },
     { id: "contact", label: "Contact" },
 ];
 
@@ -14,7 +15,13 @@ const mobileLinks = [
     { id: "contact", label: "Contact" },
 ];
 
-const trackedIds = ["home", "programs", "classes", "showcase", "contact"];
+const trackedIds = ["home", "programs", "classes", "showcase", "stories", "contact"];
+
+const isMobileLinkActive = (linkId, activeSection) => {
+    if (linkId === activeSection) return true;
+    if (linkId === "classes" && ["classes", "showcase", "stories"].includes(activeSection)) return true;
+    return false;
+};
 
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -59,7 +66,7 @@ const Navbar = () => {
                             ELITE
                         </a>
 
-                        <ul className="hidden md:flex items-center gap-6 font-sans text-sm uppercase">
+                        <ul className="hidden md:flex items-center gap-5 font-sans text-sm uppercase">
                             {desktopLinks.map((link) => {
                                 const isActive = activeSection === link.id;
 
@@ -90,7 +97,7 @@ const Navbar = () => {
 
                         <ul className="md:hidden flex-1 min-w-0 flex items-center justify-between gap-1 rounded-full border border-white/15 bg-black/65 backdrop-blur-xl p-1 shadow-[0_8px_24px_rgba(0,0,0,0.45)]">
                             {mobileLinks.map((link) => {
-                                const isActive = activeSection === link.id;
+                                const isActive = isMobileLinkActive(link.id, activeSection);
 
                                 return (
                                     <li key={link.id} className="flex-1 min-w-0">
