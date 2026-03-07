@@ -1,12 +1,12 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Programs from "./components/Programs";
+import ScrollSection from "./components/ScrollSection";
 import MomentumStrip from "./components/MomentumStrip";
 import Classes from "./components/Classes";
 import HorizontalShowcase from "./components/HorizontalShowcase";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-import ScrollSection from "./components/ScrollSection.jsx";
 
 function App() {
     return (

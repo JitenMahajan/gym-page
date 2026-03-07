@@ -14,12 +14,34 @@ const mobileLinks = [
     { id: "contact", label: "Contact" },
 ];
 
+const trackedIds = ["home", "programs", "classes", "showcase", "contact"];
+
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false);
+    const [activeSection, setActiveSection] = useState("home");
 
     useEffect(() => {
-        const handleScroll = () => setScrolled(window.scrollY > 40);
-        window.addEventListener("scroll", handleScroll);
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 40);
+
+            const viewportMarker = 140;
+            let current = "home";
+
+            for (const id of trackedIds) {
+                const section = document.getElementById(id);
+                if (!section) continue;
+                const rect = section.getBoundingClientRect();
+
+                if (rect.top <= viewportMarker && rect.bottom > viewportMarker) {
+                    current = id;
+                }
+            }
+
+            setActiveSection(current);
+        };
+
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
@@ -37,14 +59,26 @@ const Navbar = () => {
                             ELITE
                         </a>
 
-                        <ul className="hidden md:flex items-center gap-8 font-sans text-sm uppercase">
-                            {desktopLinks.map((link) => (
-                                <li key={link.id}>
-                                    <a href={`#${link.id}`} className="hover:text-volt transition-colors">
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
+                        <ul className="hidden md:flex items-center gap-6 font-sans text-sm uppercase">
+                            {desktopLinks.map((link) => {
+                                const isActive = activeSection === link.id;
+
+                                return (
+                                    <li key={link.id}>
+                                        <a
+                                            href={`#${link.id}`}
+                                            aria-current={isActive ? "page" : undefined}
+                                            className={`px-2 py-1 border-b-2 transition-colors ${
+                                                isActive
+                                                    ? "text-volt border-volt"
+                                                    : "text-white border-transparent hover:text-volt"
+                                            }`}
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                );
+                            })}
                         </ul>
 
                         <a
@@ -57,16 +91,25 @@ const Navbar = () => {
 
                     <div className="md:hidden pb-3">
                         <ul className="flex items-center justify-between gap-1 rounded-full border border-white/15 bg-black/65 backdrop-blur-xl p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.45)]">
-                            {mobileLinks.map((link) => (
-                                <li key={link.id} className="flex-1">
-                                    <a
-                                        href={`#${link.id}`}
-                                        className="block text-center rounded-full px-2 py-2 text-[11px] font-semibold uppercase tracking-wide text-prose-primary hover:bg-white/10 hover:text-volt transition-colors"
-                                    >
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
+                            {mobileLinks.map((link) => {
+                                const isActive = activeSection === link.id;
+
+                                return (
+                                    <li key={link.id} className="flex-1">
+                                        <a
+                                            href={`#${link.id}`}
+                                            aria-current={isActive ? "page" : undefined}
+                                            className={`block text-center rounded-full px-2 py-2 text-[11px] font-semibold uppercase tracking-wide transition-colors ${
+                                                isActive
+                                                    ? "bg-volt text-black"
+                                                    : "text-prose-primary hover:bg-white/10 hover:text-volt"
+                                            }`}
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </div>
                 </div>

@@ -3,14 +3,22 @@
 @tailwind utilities;
 
 @layer base {
-  body {
-    margin: 0;
-    background-color: theme('colors.obsidian');
-    color: theme('colors.white');
-    font-family: theme('fontFamily.sans');
-  }
-
   html {
     scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    color: theme('colors.white');
+    font-family: theme('fontFamily.sans');
+    background:
+      radial-gradient(1200px 500px at 50% -150px, rgba(204, 255, 0, 0.12), transparent 60%),
+      radial-gradient(900px 400px at 90% 20%, rgba(255, 255, 255, 0.04), transparent 55%),
+      #0A0A0A;
+  }
+
+  ::selection {
+    background: rgba(204, 255, 0, 0.35);
+    color: #0A0A0A;
   }
 }
