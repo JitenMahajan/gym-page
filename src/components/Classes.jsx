@@ -73,7 +73,7 @@ const Classes = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-12 md:mb-16">
                     <h2 className="section-title text-4xl sm:text-5xl md:text-7xl font-display uppercase text-volt">
-                        Our Programs
+                        Coaching Classes
                     </h2>
                     <p className="section-title text-base md:text-lg text-prose-secondary mt-4 max-w-2xl mx-auto font-sans">
                         Choose your battle. We have a program designed to push your limits,
@@ -115,3 +115,4 @@ const Classes = () => {
 };
 
 export default Classes;
+

@@ -17,8 +17,36 @@
       #0A0A0A;
   }
 
+  a,
+  button,
+  input,
+  textarea {
+    transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #CCFF00;
+    outline-offset: 2px;
+  }
+
   ::selection {
     background: rgba(204, 255, 0, 0.35);
     color: #0A0A0A;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
