@@ -54,8 +54,8 @@ const Navbar = () => {
                 aria-label="Primary"
             >
                 <div className="max-w-7xl mx-auto px-4 md:px-6">
-                    <div className="h-16 md:h-20 flex items-center justify-between">
-                        <a href="#home" className="text-2xl font-display text-volt tracking-wide">
+                    <div className="h-16 md:h-20 flex items-center justify-between gap-3">
+                        <a href="#home" className="text-2xl font-display text-volt tracking-wide shrink-0">
                             ELITE
                         </a>
 
@@ -87,19 +87,17 @@ const Navbar = () => {
                         >
                             Join
                         </a>
-                    </div>
 
-                    <div className="md:hidden pb-3">
-                        <ul className="flex items-center justify-between gap-1 rounded-full border border-white/15 bg-black/65 backdrop-blur-xl p-1.5 shadow-[0_12px_36px_rgba(0,0,0,0.45)]">
+                        <ul className="md:hidden flex-1 min-w-0 flex items-center justify-between gap-1 rounded-full border border-white/15 bg-black/65 backdrop-blur-xl p-1 shadow-[0_8px_24px_rgba(0,0,0,0.45)]">
                             {mobileLinks.map((link) => {
                                 const isActive = activeSection === link.id;
 
                                 return (
-                                    <li key={link.id} className="flex-1">
+                                    <li key={link.id} className="flex-1 min-w-0">
                                         <a
                                             href={`#${link.id}`}
                                             aria-current={isActive ? "page" : undefined}
-                                            className={`block text-center rounded-full px-2 py-2 text-[11px] font-semibold uppercase tracking-wide transition-colors ${
+                                            className={`block text-center rounded-full px-1.5 py-1.5 text-[10px] font-semibold uppercase tracking-wide transition-colors truncate ${
                                                 isActive
                                                     ? "bg-volt text-black"
                                                     : "text-prose-primary hover:bg-white/10 hover:text-volt"
