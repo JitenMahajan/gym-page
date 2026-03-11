@@ -2,6 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes backTopFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes backTopSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -42,11 +60,34 @@
       scroll-behavior: auto;
     }
 
-    *, *::before, *::after {
+    *,
+    *::before,
+    *::after {
       animation-duration: 0.01ms !important;
       animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer components {
+  .back-top-btn {
+    transition: opacity 240ms ease, transform 240ms ease;
+  }
+
+  .back-top-btn:hover .back-top-arrow {
+    transform: translateY(-2px);
+  }
+
+  .back-top-arrow {
+    animation: backTopFloat 1.8s ease-in-out infinite;
+    transition: transform 180ms ease;
+  }
+
+  .back-top-ring {
+    background: conic-gradient(from 0deg, rgba(204, 255, 0, 0.9), rgba(204, 255, 0, 0.2), rgba(204, 255, 0, 0.9));
+    filter: saturate(1.1);
+    animation: backTopSpin 4s linear infinite;
   }
 }

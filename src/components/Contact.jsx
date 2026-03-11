@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjgpeva";
+
 const quickInfo = [
     { label: "Phone", value: "6230348752", href: "tel:6230348752" },
     { label: "Email", value: "elite@gymstudio.com", href: "mailto:elite@gymstudio.com" },
@@ -7,12 +9,42 @@ const quickInfo = [
 ];
 
 const Contact = () => {
-    const [submitted, setSubmitted] = useState(false);
+    const [status, setStatus] = useState("idle");
+    const [errorMessage, setErrorMessage] = useState("");
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        event.currentTarget.reset();
-        setSubmitted(true);
+        setStatus("submitting");
+        setErrorMessage("");
+
+        const form = event.currentTarget;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch(FORMSPREE_ENDPOINT, {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                },
+                body: formData,
+            });
+
+            if (response.ok) {
+                form.reset();
+                setStatus("success");
+                return;
+            }
+
+            const responseData = await response.json().catch(() => null);
+            const message = responseData?.errors?.map((item) => item.message).join(" ")
+                || "Could not submit right now. Please try again in a moment.";
+
+            setErrorMessage(message);
+            setStatus("error");
+        } catch {
+            setErrorMessage("Network issue while submitting. Please check your connection and try again.");
+            setStatus("error");
+        }
     };
 
     return (
@@ -28,9 +60,12 @@ const Contact = () => {
 
                     <div className="grid md:grid-cols-5 gap-6 md:gap-8">
                         <form className="md:col-span-3 space-y-5" onSubmit={handleSubmit}>
+                            <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" />
+
                             <label htmlFor="name" className="sr-only">Your Name</label>
                             <input
                                 id="name"
+                                name="name"
                                 type="text"
                                 placeholder="Your Name"
                                 className="w-full p-4 bg-black/35 border border-white/15 rounded-lg focus:outline-none focus:border-volt focus:ring-2 focus:ring-volt/50"
@@ -41,6 +76,7 @@ const Contact = () => {
                             <label htmlFor="email" className="sr-only">Your Email</label>
                             <input
                                 id="email"
+                                name="email"
                                 type="email"
                                 placeholder="Your Email"
                                 className="w-full p-4 bg-black/35 border border-white/15 rounded-lg focus:outline-none focus:border-volt focus:ring-2 focus:ring-volt/50"
@@ -51,19 +87,30 @@ const Contact = () => {
                             <label htmlFor="goal" className="sr-only">Your Goal</label>
                             <textarea
                                 id="goal"
+                                name="goal"
                                 placeholder="Your Goal"
                                 rows="5"
                                 className="w-full p-4 bg-black/35 border border-white/15 rounded-lg focus:outline-none focus:border-volt focus:ring-2 focus:ring-volt/50"
                                 required
                             />
 
-                            <button className="w-full bg-volt text-obsidian font-bold py-4 rounded-lg hover:brightness-95 hover:scale-[1.01] transition">
-                                Apply Now
+                            <button
+                                type="submit"
+                                disabled={status === "submitting"}
+                                className="w-full bg-volt text-obsidian font-bold py-4 rounded-lg hover:brightness-95 hover:scale-[1.01] transition disabled:opacity-70 disabled:cursor-not-allowed"
+                            >
+                                {status === "submitting" ? "Sending..." : "Apply Now"}
                             </button>
 
-                            {submitted && (
+                            {status === "success" && (
                                 <p className="text-sm text-volt text-center" role="status" aria-live="polite">
-                                    Request received. We will call you shortly.
+                                    Request sent successfully. We will call you shortly.
+                                </p>
+                            )}
+
+                            {status === "error" && (
+                                <p className="text-sm text-red-400 text-center" role="alert" aria-live="polite">
+                                    {errorMessage}
                                 </p>
                             )}
                         </form>
