@@ -10,7 +10,6 @@ const desktopLinks = [
 
 const mobileLinks = [
     { id: "home", label: "Home" },
-    { id: "programs", label: "Programs" },
     { id: "classes", label: "Classes" },
     { id: "contact", label: "Contact" },
 ];

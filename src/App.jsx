@@ -2,7 +2,6 @@ import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Programs from "./components/Programs";
 import ScrollSection from "./components/ScrollSection";
-import MomentumStrip from "./components/MomentumStrip";
 import Classes from "./components/Classes";
 import HorizontalShowcase from "./components/HorizontalShowcase";
 import Testimonials from "./components/Testimonials";
@@ -27,7 +26,6 @@ function App() {
                 <Hero />
                 <Programs />
                 <ScrollSection />
-                <MomentumStrip />
                 <Classes />
                 <HorizontalShowcase />
                 <Testimonials />

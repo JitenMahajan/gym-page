@@ -1,4 +1,4 @@
-import coach from "../assets/images/coach.jpeg";
+import coach from "../assets/images/coach.jpg";
 
 const About = () => {
     return (

@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import strength from "../assets/images/strength.jpeg";
 import training from "../assets/images/training.jpeg";
 import workout from "../assets/images/workout.jpeg";
-import dumbbell from "../assets/images/dumbbell.jpeg";
+import dumbbell from "../assets/images/dumbell.jpeg";
 
 gsap.registerPlugin(ScrollTrigger);
 
